@@ -1,0 +1,37 @@
+package agents
+
+import service.CarPreferenceService
+import io.sarl.core.Initialize
+import io.sarl.core.Destroy
+import models.CarPreference
+import io.sarl.core.Logging
+import events.UserDetected
+import api.SmartCarAPI
+
+agent CarAdapterAgent {
+	uses Logging
+	var carPreferences : CarPreference
+	var smartCarAPI : SmartCarAPI = new SmartCarAPI()
+	var jsonString : String
+	
+	on Initialize {
+		info("The agent was started.")
+	}
+
+	on Destroy {
+		info("The agent was stopped.")
+	}
+	
+	on UserDetected{
+		println("NEW USER DETECDED: " + occurrence.userName)
+		println("SEEKING SERVER PREFERENCES")
+		
+		jsonString = smartCarAPI.getCarPreferenceByUsername(occurrence.userName)
+		carPreferences = new CarPreferenceService().convertJsonStringToCarPreference(jsonString)
+
+		println("----ADAPTING CAR----")
+		println("CarPreference: ")
+		println(carPreferences)
+		println("")	
+	}
+}

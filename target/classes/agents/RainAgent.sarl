@@ -1,0 +1,32 @@
+package agents
+
+import io.sarl.core.Destroy
+import io.sarl.core.Initialize
+import io.sarl.core.Logging
+import events.Rain
+
+agent RainAgent {
+	uses Logging
+
+	on Initialize {
+
+		info("RainAgent was started.")
+	}
+
+	on Destroy {
+		
+		info("RainAgent was stopped.")
+	}
+
+	on Rain [occurrence.isRaining] {
+		println("Fechar teto solar")
+		println("Ativar parabrisas")
+	}
+
+	on Rain [!occurrence.isRaining] {
+		println("Desativar parabrisas")
+	}
+	
+	
+
+}

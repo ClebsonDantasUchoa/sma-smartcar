@@ -1,0 +1,19 @@
+package agents
+
+import io.sarl.core.Initialize
+import io.sarl.core.Logging
+import events.RearProximity
+
+agent ProximityAgent {
+	uses Logging
+	
+	on Initialize {
+		info("ProximityAgent was started.")
+	}
+	
+	on RearProximity [occurrence.distance <= 0.2] {
+		println("Carro está muito próximo")
+		println("Bloquear acelerador")
+	}
+
+}

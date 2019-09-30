@@ -1,0 +1,33 @@
+package events
+
+event Rain {
+	val isRaining : boolean
+
+	new(isRaining : boolean) {
+		this.isRaining = isRaining
+	}
+
+}
+
+event FrontalProximity{
+	val distance : int
+	new(distance: int){
+		this.distance = distance
+	}
+}
+
+event RearProximity {
+	val distance : double
+
+	new(distance : double) {
+		this.distance = distance
+	}
+}
+
+event UserDetected {
+	val userName : String
+
+	new(userName : String) {
+		this.userName = userName
+	}
+}

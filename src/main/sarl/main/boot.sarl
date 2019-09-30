@@ -1,0 +1,49 @@
+package main
+
+import io.sarl.core.DefaultContextInteractions
+import io.sarl.core.Initialize
+import io.sarl.core.Schedules
+import io.sarl.core.Lifecycle
+import agents.CarAdapterAgent
+import agents.ProximityAgent
+import io.sarl.core.Destroy
+import io.sarl.core.Logging
+import events.UserDetected
+import java.util.Random
+import agents.RainAgent
+import events.Rain
+
+agent boot {
+	uses Logging, Lifecycle, Schedules, DefaultContextInteractions
+	var random : Random = new Random()
+
+	on Initialize {
+		info("The agent was started.")
+		//spawn(RainAgent)
+		//spawn(ProximityAgent)
+		spawn(CarAdapterAgent)
+		simulateEvents()
+	}
+
+	on Destroy {
+		
+		info("The agent was stopped.")
+	}
+	
+	def simulateEvents() {
+		
+		val taskVar = task("simulate_events")
+		taskVar.every(20000) [
+			var numero = random.nextInt(1)
+			println("------------------")
+			println("numero: " + numero)
+			if (numero == 0)
+				emit(new UserDetected('rafael'))
+			else if (numero == 1)
+				emit(new UserDetected('marcos'))				
+		]
+		//taskVar.cancel
+		
+	}
+
+}
