@@ -31,3 +31,9 @@ event UserDetected {
 		this.userName = userName
 	}
 }
+
+event CarChange{
+	new(){
+		
+	}
+}

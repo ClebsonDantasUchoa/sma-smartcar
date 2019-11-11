@@ -30,7 +30,7 @@ import service.CarPreferenceService;
 @SarlSpecification("0.9")
 @SarlElementType(19)
 @SuppressWarnings("all")
-public class CarAdapterAgent extends Agent {
+public class CarAdapter extends Agent {
   private CarPreference carPreferences;
   
   private SmartCarAPI smartCarAPI = new SmartCarAPI();
@@ -49,7 +49,8 @@ public class CarAdapterAgent extends Agent {
   
   private void $behaviorUnit$UserDetected$2(final UserDetected occurrence) {
     try {
-      InputOutput.<String>println(("NEW USER DETECDED: " + occurrence.userName));
+      InputOutput.<String>println("---------DETECTED EVENT USERDETECTED ON CAR ADAPTER AGENT--------------");
+      InputOutput.<String>println(("USER: " + occurrence.userName));
       InputOutput.<String>println("SEEKING SERVER PREFERENCES");
       this.jsonString = this.smartCarAPI.getCarPreferenceByUsername(occurrence.userName);
       this.carPreferences = new CarPreferenceService().convertJsonStringToCarPreference(this.jsonString);
@@ -111,7 +112,7 @@ public class CarAdapterAgent extends Agent {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    CarAdapterAgent other = (CarAdapterAgent) obj;
+    CarAdapter other = (CarAdapter) obj;
     if (!Objects.equals(this.jsonString, other.jsonString)) {
       return false;
     }
@@ -129,20 +130,20 @@ public class CarAdapterAgent extends Agent {
   }
   
   @SyntheticMember
-  public CarAdapterAgent(final UUID parentID, final UUID agentID) {
+  public CarAdapter(final UUID parentID, final UUID agentID) {
     super(parentID, agentID);
   }
   
   @SyntheticMember
   @Inject
   @Deprecated
-  public CarAdapterAgent(final BuiltinCapacitiesProvider provider, final UUID parentID, final UUID agentID) {
+  public CarAdapter(final BuiltinCapacitiesProvider provider, final UUID parentID, final UUID agentID) {
     super(provider, parentID, agentID);
   }
   
   @SyntheticMember
   @Inject
-  public CarAdapterAgent(final UUID parentID, final UUID agentID, final DynamicSkillProvider skillProvider) {
+  public CarAdapter(final UUID parentID, final UUID agentID, final DynamicSkillProvider skillProvider) {
     super(parentID, agentID, skillProvider);
   }
 }

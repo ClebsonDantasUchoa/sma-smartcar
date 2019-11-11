@@ -14,7 +14,9 @@ public class CarPreferenceService {
 		String username = json.get("username").getAsString();
 		int steeringWheelHeight = json.get("steeringWheelHeight").getAsInt();
 		int seatTilt = json.get("seatTilt").getAsInt();
-		return new CarPreference(username, steeringWheelHeight, seatTilt);
+		CarPreference carPreference = CarPreference.getInstance();
+		carPreference.setAtributes(username, steeringWheelHeight, seatTilt);
+		return carPreference;
 	}
 
 }

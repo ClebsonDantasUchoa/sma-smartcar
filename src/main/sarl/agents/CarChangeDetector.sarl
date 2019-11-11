@@ -1,0 +1,26 @@
+package agents
+
+import io.sarl.core.Destroy
+import io.sarl.core.Initialize
+import io.sarl.core.Logging
+import events.CarChange
+
+agent CarChangeDetector {
+	uses Logging
+
+	on Initialize {
+		
+		info("The agent was started.")
+	}
+
+	on Destroy {
+		
+		info("The agent was stopped.")
+	}
+	
+	on CarChange{
+		println("CarChange detected on CarChangeDetector agent")
+		//IMPLEMENTAR AS FUNCIONALIDADES
+	}
+
+}
