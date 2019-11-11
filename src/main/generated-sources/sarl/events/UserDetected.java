@@ -8,7 +8,7 @@ import java.util.Objects;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
-@SarlSpecification("0.9")
+@SarlSpecification("0.10")
 @SarlElementType(15)
 @SuppressWarnings("all")
 public class UserDetected extends Event {

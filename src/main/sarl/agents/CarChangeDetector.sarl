@@ -1,12 +1,18 @@
 package agents
 
+import events.CarChange
 import io.sarl.core.Destroy
 import io.sarl.core.Initialize
 import io.sarl.core.Logging
-import events.CarChange
+import models.CarPreference
+import service.CarPreferenceService
+import api.SmartCarAPI
 
 agent CarChangeDetector {
 	uses Logging
+	var carPreference : CarPreference = CarPreference.getInstance()
+	var smartCarAPI : SmartCarAPI = new SmartCarAPI()
+	var jsonString : String
 
 	on Initialize {
 		
@@ -19,8 +25,10 @@ agent CarChangeDetector {
 	}
 	
 	on CarChange{
-		println("CarChange detected on CarChangeDetector agent")
-		//IMPLEMENTAR AS FUNCIONALIDADES
+		println("------------CarChange detected on CarChangeDetector agent---------")
+		jsonString = new CarPreferenceService().convertCarPreferenceToJsonString(carPreference)
+		smartCarAPI.saveCarChange(jsonString)
+		println("")
 	}
 
 }

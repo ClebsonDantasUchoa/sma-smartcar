@@ -1,5 +1,6 @@
 package agents;
 
+import api.SmartCarAPI;
 import events.CarChange;
 import io.sarl.core.Destroy;
 import io.sarl.core.Initialize;
@@ -15,17 +16,27 @@ import io.sarl.lang.core.DynamicSkillProvider;
 import io.sarl.lang.core.Skill;
 import io.sarl.lang.util.ClearableReference;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.UUID;
 import javax.inject.Inject;
+import models.CarPreference;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Inline;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.Pure;
+import service.CarPreferenceService;
 
-@SarlSpecification("0.9")
+@SarlSpecification("0.10")
 @SarlElementType(19)
 @SuppressWarnings("all")
 public class CarChangeDetector extends Agent {
+  private CarPreference carPreference = CarPreference.getInstance();
+  
+  private SmartCarAPI smartCarAPI = new SmartCarAPI();
+  
+  private String jsonString;
+  
   private void $behaviorUnit$Initialize$0(final Initialize occurrence) {
     Logging _$CAPACITY_USE$IO_SARL_CORE_LOGGING$CALLER = this.$castSkill(Logging.class, (this.$CAPACITY_USE$IO_SARL_CORE_LOGGING == null || this.$CAPACITY_USE$IO_SARL_CORE_LOGGING.get() == null) ? (this.$CAPACITY_USE$IO_SARL_CORE_LOGGING = this.$getSkill(Logging.class)) : this.$CAPACITY_USE$IO_SARL_CORE_LOGGING);
     _$CAPACITY_USE$IO_SARL_CORE_LOGGING$CALLER.info("The agent was started.");
@@ -37,7 +48,14 @@ public class CarChangeDetector extends Agent {
   }
   
   private void $behaviorUnit$CarChange$2(final CarChange occurrence) {
-    InputOutput.<String>println("CarChange detected on CarChangeDetector agent");
+    try {
+      InputOutput.<String>println("------------CarChange detected on CarChangeDetector agent---------");
+      this.jsonString = new CarPreferenceService().convertCarPreferenceToJsonString(this.carPreference);
+      this.smartCarAPI.saveCarChange(this.jsonString);
+      InputOutput.<String>println("");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Extension
@@ -77,6 +95,33 @@ public class CarChangeDetector extends Agent {
     assert occurrence != null;
     assert ___SARLlocal_runnableCollection != null;
     ___SARLlocal_runnableCollection.add(() -> $behaviorUnit$Destroy$1(occurrence));
+  }
+  
+  @Override
+  @Pure
+  @SyntheticMember
+  public boolean equals(final Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    CarChangeDetector other = (CarChangeDetector) obj;
+    if (!Objects.equals(this.jsonString, other.jsonString)) {
+      return false;
+    }
+    return super.equals(obj);
+  }
+  
+  @Override
+  @Pure
+  @SyntheticMember
+  public int hashCode() {
+    int result = super.hashCode();
+    final int prime = 31;
+    result = prime * result + Objects.hashCode(this.jsonString);
+    return result;
   }
   
   @SyntheticMember

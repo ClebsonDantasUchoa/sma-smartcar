@@ -1,5 +1,6 @@
 package service;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -17,6 +18,12 @@ public class CarPreferenceService {
 		CarPreference carPreference = CarPreference.getInstance();
 		carPreference.setAtributes(username, steeringWheelHeight, seatTilt);
 		return carPreference;
+	}
+	
+	public String convertCarPreferenceToJsonString(CarPreference carPreference) {
+		Gson gson = new Gson();
+		String json = gson.toJson(carPreference);
+		return json;
 	}
 
 }
