@@ -8,7 +8,7 @@ import io.sarl.core.Logging
 import events.UserDetected
 import api.SmartCarAPI
 
-agent CarAdapterAgent {
+agent CarAdapter {
 	uses Logging
 	var carPreferences : CarPreference
 	var smartCarAPI : SmartCarAPI = new SmartCarAPI()
@@ -23,7 +23,8 @@ agent CarAdapterAgent {
 	}
 	
 	on UserDetected{
-		println("NEW USER DETECDED: " + occurrence.userName)
+		println('---------DETECTED EVENT USERDETECTED ON CAR ADAPTER AGENT--------------')
+		println("USER: " + occurrence.userName)
 		println("SEEKING SERVER PREFERENCES")
 		
 		jsonString = smartCarAPI.getCarPreferenceByUsername(occurrence.userName)
@@ -34,4 +35,5 @@ agent CarAdapterAgent {
 		println(carPreferences)
 		println("")	
 	}
+	
 }

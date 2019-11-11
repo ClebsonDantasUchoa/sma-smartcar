@@ -1,6 +1,6 @@
 package agents;
 
-import events.Rain;
+import events.CarChange;
 import io.sarl.core.Destroy;
 import io.sarl.core.Initialize;
 import io.sarl.core.Logging;
@@ -25,36 +25,19 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SarlSpecification("0.9")
 @SarlElementType(19)
 @SuppressWarnings("all")
-public class RainAgent extends Agent {
+public class CarChangeDetector extends Agent {
   private void $behaviorUnit$Initialize$0(final Initialize occurrence) {
     Logging _$CAPACITY_USE$IO_SARL_CORE_LOGGING$CALLER = this.$castSkill(Logging.class, (this.$CAPACITY_USE$IO_SARL_CORE_LOGGING == null || this.$CAPACITY_USE$IO_SARL_CORE_LOGGING.get() == null) ? (this.$CAPACITY_USE$IO_SARL_CORE_LOGGING = this.$getSkill(Logging.class)) : this.$CAPACITY_USE$IO_SARL_CORE_LOGGING);
-    _$CAPACITY_USE$IO_SARL_CORE_LOGGING$CALLER.info("RainAgent was started.");
+    _$CAPACITY_USE$IO_SARL_CORE_LOGGING$CALLER.info("The agent was started.");
   }
   
   private void $behaviorUnit$Destroy$1(final Destroy occurrence) {
     Logging _$CAPACITY_USE$IO_SARL_CORE_LOGGING$CALLER = this.$castSkill(Logging.class, (this.$CAPACITY_USE$IO_SARL_CORE_LOGGING == null || this.$CAPACITY_USE$IO_SARL_CORE_LOGGING.get() == null) ? (this.$CAPACITY_USE$IO_SARL_CORE_LOGGING = this.$getSkill(Logging.class)) : this.$CAPACITY_USE$IO_SARL_CORE_LOGGING);
-    _$CAPACITY_USE$IO_SARL_CORE_LOGGING$CALLER.info("RainAgent was stopped.");
+    _$CAPACITY_USE$IO_SARL_CORE_LOGGING$CALLER.info("The agent was stopped.");
   }
   
-  private void $behaviorUnit$Rain$2(final Rain occurrence) {
-    InputOutput.<String>println("Fechar teto solar");
-    InputOutput.<String>println("Ativar parabrisas");
-  }
-  
-  @SyntheticMember
-  @Pure
-  private boolean $behaviorUnitGuard$Rain$2(final Rain it, final Rain occurrence) {
-    return occurrence.isRaining;
-  }
-  
-  private void $behaviorUnit$Rain$3(final Rain occurrence) {
-    InputOutput.<String>println("Desativar parabrisas");
-  }
-  
-  @SyntheticMember
-  @Pure
-  private boolean $behaviorUnitGuard$Rain$3(final Rain it, final Rain occurrence) {
-    return (!occurrence.isRaining);
+  private void $behaviorUnit$CarChange$2(final CarChange occurrence) {
+    InputOutput.<String>println("CarChange detected on CarChangeDetector agent");
   }
   
   @Extension
@@ -82,6 +65,14 @@ public class RainAgent extends Agent {
   
   @SyntheticMember
   @PerceptGuardEvaluator
+  private void $guardEvaluator$CarChange(final CarChange occurrence, final Collection<Runnable> ___SARLlocal_runnableCollection) {
+    assert occurrence != null;
+    assert ___SARLlocal_runnableCollection != null;
+    ___SARLlocal_runnableCollection.add(() -> $behaviorUnit$CarChange$2(occurrence));
+  }
+  
+  @SyntheticMember
+  @PerceptGuardEvaluator
   private void $guardEvaluator$Destroy(final Destroy occurrence, final Collection<Runnable> ___SARLlocal_runnableCollection) {
     assert occurrence != null;
     assert ___SARLlocal_runnableCollection != null;
@@ -89,33 +80,20 @@ public class RainAgent extends Agent {
   }
   
   @SyntheticMember
-  @PerceptGuardEvaluator
-  private void $guardEvaluator$Rain(final Rain occurrence, final Collection<Runnable> ___SARLlocal_runnableCollection) {
-    assert occurrence != null;
-    assert ___SARLlocal_runnableCollection != null;
-    if ($behaviorUnitGuard$Rain$2(occurrence, occurrence)) {
-      ___SARLlocal_runnableCollection.add(() -> $behaviorUnit$Rain$2(occurrence));
-    }
-    if ($behaviorUnitGuard$Rain$3(occurrence, occurrence)) {
-      ___SARLlocal_runnableCollection.add(() -> $behaviorUnit$Rain$3(occurrence));
-    }
-  }
-  
-  @SyntheticMember
-  public RainAgent(final UUID parentID, final UUID agentID) {
+  public CarChangeDetector(final UUID parentID, final UUID agentID) {
     super(parentID, agentID);
   }
   
   @SyntheticMember
   @Inject
   @Deprecated
-  public RainAgent(final BuiltinCapacitiesProvider provider, final UUID parentID, final UUID agentID) {
+  public CarChangeDetector(final BuiltinCapacitiesProvider provider, final UUID parentID, final UUID agentID) {
     super(provider, parentID, agentID);
   }
   
   @SyntheticMember
   @Inject
-  public RainAgent(final UUID parentID, final UUID agentID, final DynamicSkillProvider skillProvider) {
+  public CarChangeDetector(final UUID parentID, final UUID agentID, final DynamicSkillProvider skillProvider) {
     super(parentID, agentID, skillProvider);
   }
 }
