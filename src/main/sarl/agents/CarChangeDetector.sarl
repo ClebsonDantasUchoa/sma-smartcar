@@ -1,12 +1,16 @@
 package agents
 
+import events.CarChange
 import io.sarl.core.Destroy
 import io.sarl.core.Initialize
 import io.sarl.core.Logging
-import events.CarChange
+import models.CarPreference
+import service.CarPreferenceService
 
 agent CarChangeDetector {
 	uses Logging
+	var carPreference : CarPreference = CarPreference.getInstance()
+	var jsonString : String
 
 	on Initialize {
 		
@@ -20,6 +24,8 @@ agent CarChangeDetector {
 	
 	on CarChange{
 		println("CarChange detected on CarChangeDetector agent")
+		jsonString = new CarPreferenceService().convertCarPreferenceToJsonString(carPreference)
+		println(jsonString)
 		//IMPLEMENTAR AS FUNCIONALIDADES
 	}
 

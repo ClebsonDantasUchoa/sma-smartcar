@@ -1,5 +1,7 @@
 package service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -19,13 +21,11 @@ public class CarPreferenceService {
 		return carPreference;
 	}
 	
-//	public String convertCarPreferenceToJsonString(CarPreference carPreference) throws JsonProcessingException {
-//		ObjectMapper conversor = new ObjectMapper();
-//		String json = conversor.writeValueAsString(carPreference);
-//		
-//		System.out.println(json);
-//		
-//		return json;
-//	}
+	public String convertCarPreferenceToJsonString(CarPreference carPreference) throws JsonProcessingException {
+		ObjectMapper conversor = new ObjectMapper();
+		String json = conversor.writeValueAsString(carPreference);
+		
+		return json;
+	}
 
 }
