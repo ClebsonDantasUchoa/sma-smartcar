@@ -77,8 +77,6 @@ public class boot extends Agent {
             _$CAPACITY_USE$IO_SARL_CORE_DEFAULTCONTEXTINTERACTIONS$CALLER_1.emit(_userDetected_1);
           }
         }
-        Schedules _$CAPACITY_USE$IO_SARL_CORE_SCHEDULES$CALLER_2 = this.$castSkill(Schedules.class, (this.$CAPACITY_USE$IO_SARL_CORE_SCHEDULES == null || this.$CAPACITY_USE$IO_SARL_CORE_SCHEDULES.get() == null) ? (this.$CAPACITY_USE$IO_SARL_CORE_SCHEDULES = this.$getSkill(Schedules.class)) : this.$CAPACITY_USE$IO_SARL_CORE_SCHEDULES);
-        _$CAPACITY_USE$IO_SARL_CORE_SCHEDULES$CALLER_2.cancel(taskVar);
       };
       _xblockexpression = _$CAPACITY_USE$IO_SARL_CORE_SCHEDULES$CALLER_1.every(taskVar, 20000, _function);
     }
@@ -93,12 +91,13 @@ public class boot extends Agent {
       Schedules _$CAPACITY_USE$IO_SARL_CORE_SCHEDULES$CALLER_1 = this.$castSkill(Schedules.class, (this.$CAPACITY_USE$IO_SARL_CORE_SCHEDULES == null || this.$CAPACITY_USE$IO_SARL_CORE_SCHEDULES.get() == null) ? (this.$CAPACITY_USE$IO_SARL_CORE_SCHEDULES = this.$getSkill(Schedules.class)) : this.$CAPACITY_USE$IO_SARL_CORE_SCHEDULES);
       final Procedure1<Agent> _function = (Agent it) -> {
         int numero = this.random.nextInt(1);
+        int randomSteeringWheelHeight = this.random.nextInt(95);
         InputOutput.<String>println("---------SIMULATING CAR CHANGE---------");
         InputOutput.<String>println(("numero: " + Integer.valueOf(numero)));
         boolean _equals = this.carPreference.getUsername().equals("");
         if ((!_equals)) {
           if ((numero == 0)) {
-            this.carPreference.setSteeringWheelHeight(94);
+            this.carPreference.setSteeringWheelHeight(randomSteeringWheelHeight);
             DefaultContextInteractions _$CAPACITY_USE$IO_SARL_CORE_DEFAULTCONTEXTINTERACTIONS$CALLER = this.$castSkill(DefaultContextInteractions.class, (this.$CAPACITY_USE$IO_SARL_CORE_DEFAULTCONTEXTINTERACTIONS == null || this.$CAPACITY_USE$IO_SARL_CORE_DEFAULTCONTEXTINTERACTIONS.get() == null) ? (this.$CAPACITY_USE$IO_SARL_CORE_DEFAULTCONTEXTINTERACTIONS = this.$getSkill(DefaultContextInteractions.class)) : this.$CAPACITY_USE$IO_SARL_CORE_DEFAULTCONTEXTINTERACTIONS);
             CarChange _carChange = new CarChange();
             _$CAPACITY_USE$IO_SARL_CORE_DEFAULTCONTEXTINTERACTIONS$CALLER.emit(_carChange);

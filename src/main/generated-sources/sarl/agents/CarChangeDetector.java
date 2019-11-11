@@ -1,5 +1,6 @@
 package agents;
 
+import api.SmartCarAPI;
 import events.CarChange;
 import io.sarl.core.Destroy;
 import io.sarl.core.Initialize;
@@ -32,6 +33,8 @@ import service.CarPreferenceService;
 public class CarChangeDetector extends Agent {
   private CarPreference carPreference = CarPreference.getInstance();
   
+  private SmartCarAPI smartCarAPI = new SmartCarAPI();
+  
   private String jsonString;
   
   private void $behaviorUnit$Initialize$0(final Initialize occurrence) {
@@ -46,9 +49,10 @@ public class CarChangeDetector extends Agent {
   
   private void $behaviorUnit$CarChange$2(final CarChange occurrence) {
     try {
-      InputOutput.<String>println("CarChange detected on CarChangeDetector agent");
+      InputOutput.<String>println("------------CarChange detected on CarChangeDetector agent---------");
       this.jsonString = new CarPreferenceService().convertCarPreferenceToJsonString(this.carPreference);
-      InputOutput.<String>println(this.jsonString);
+      this.smartCarAPI.saveCarChange(this.jsonString);
+      InputOutput.<String>println("");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

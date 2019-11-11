@@ -42,7 +42,7 @@ agent boot {
 			else if (numero == 1)
 				emit(new UserDetected('marcos'))
 			
-			taskVar.cancel				
+			//taskVar.cancel				
 		]
 		
 	}
@@ -51,11 +51,12 @@ agent boot {
 		val taskVar2 = task("simulate_car_change")
 		taskVar2.every(30000) [
 			var numero = random.nextInt(1)
+			var randomSteeringWheelHeight = random.nextInt(95)
 			println("---------SIMULATING CAR CHANGE---------")
 			println("numero: " + numero)
 			if (!carPreference.getUsername().equals("")) {
 				if (numero == 0) {
-					carPreference.setSteeringWheelHeight(94);
+					carPreference.setSteeringWheelHeight(randomSteeringWheelHeight);
 					emit(new CarChange())	
 				}		
 			}
