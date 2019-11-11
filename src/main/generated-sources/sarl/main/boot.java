@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
-@SarlSpecification("0.9")
+@SarlSpecification("0.10")
 @SarlElementType(19)
 @SuppressWarnings("all")
 public class boot extends Agent {

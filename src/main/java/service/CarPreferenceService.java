@@ -18,5 +18,14 @@ public class CarPreferenceService {
 		carPreference.setAtributes(username, steeringWheelHeight, seatTilt);
 		return carPreference;
 	}
+	
+//	public String convertCarPreferenceToJsonString(CarPreference carPreference) throws JsonProcessingException {
+//		ObjectMapper conversor = new ObjectMapper();
+//		String json = conversor.writeValueAsString(carPreference);
+//		
+//		System.out.println(json);
+//		
+//		return json;
+//	}
 
 }

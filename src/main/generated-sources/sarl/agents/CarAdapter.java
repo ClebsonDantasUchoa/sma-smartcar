@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.Pure;
 import service.CarPreferenceService;
 
-@SarlSpecification("0.9")
+@SarlSpecification("0.10")
 @SarlElementType(19)
 @SuppressWarnings("all")
 public class CarAdapter extends Agent {
